@@ -8,8 +8,6 @@ import Spinner from '../../spinner';
 
 import { menuLoaded, menuRequested, menuCatchedError } from '../../../actions';
 
-import AppHeader from '../../appHeader';
-
 class CoffeePage extends Component  {
 
     componentDidMount() {
@@ -57,11 +55,6 @@ class CoffeePage extends Component  {
             <>
                 <div className="banner">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <AppHeader />
-                            </div>
-                        </div>
                         <h1 className="title-big">Our Coffee</h1>
                     </div>
                 </div>
@@ -118,7 +111,7 @@ class CoffeePage extends Component  {
                                     {errorMessage}
                                     {spinner}
                                     {content}
-                                    
+
                                 </div>
                             </div>
                         </div>

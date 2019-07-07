@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import AppHeader from '../../appHeader'
 import WithCoffeeService from '../../hoc';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -49,7 +48,6 @@ class MainPage extends Component {
             <>
                 <div className="preview">
                     <div className="container">
-                        <AppHeader />
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
                                 <h1 className="title-big">Everything You Love About Coffee</h1>

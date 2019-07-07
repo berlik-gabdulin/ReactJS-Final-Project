@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import AppHeader from '../appHeader';
 import AppFooter from '../appFooter';
 import {MainPage, GoodsPage, CoffeePage, ContactPage, CoffeeSinglePage} from '../pages';
 
@@ -10,6 +11,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <AppHeader />
         <Switch>
           <Route path='/' exact component={MainPage} />
           <Route path='/coffee' exact component={CoffeePage} />

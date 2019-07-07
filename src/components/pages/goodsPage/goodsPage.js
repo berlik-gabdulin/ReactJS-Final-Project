@@ -8,8 +8,6 @@ import Spinner from '../../spinner';
 
 import { menuLoaded, menuRequested, menuCatchedError } from '../../../actions';
 
-import AppHeader from '../../appHeader';
-
 class GoodsPage extends Component  {
 
     componentDidMount() {
@@ -49,11 +47,6 @@ class GoodsPage extends Component  {
             <>
                 <div className="banner pleasure">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <AppHeader />
-                            </div>
-                        </div>
                         <h1 className="title-big">For your pleasure</h1>
                     </div>
                 </div>

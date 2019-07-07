@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AppHeader from '../../appHeader';
 import WithCoffeeService from '../../hoc';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -69,11 +68,6 @@ class CoffeeSinglePage extends Component {
             <>
                 <div className="banner">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <AppHeader />
-                            </div>
-                        </div>
                         <h1 className="title-big">Our Coffee</h1>
                     </div>
                 </div>
