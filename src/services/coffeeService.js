@@ -10,16 +10,8 @@ export default class CoffeeService {
         return await res.json();
     }
 
-    async getCoffeeItems() {
-        return await this.getResource(`/coffee/`);
-    }
-
-    async getGoodsItems() {
-        return await this.getResource(`/goods/`);
-    }
-
-    async getBestSellersItems() {
-        return await this.getResource(`/bestsellers/`);
+    async getMenuItems(url) {
+        return await this.getResource(url);
     }
 
     async postContacts() {

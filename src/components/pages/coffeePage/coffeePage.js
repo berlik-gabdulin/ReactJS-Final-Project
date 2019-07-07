@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import WithCoffeeService from '../../hoc';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import MenuListItem from '../../menuListItem';
-
+import Error from '../../error';
+import Spinner from '../../spinner';
 
 import { menuLoaded, menuRequested, menuCatchedError } from '../../../actions';
 
@@ -16,20 +17,41 @@ class CoffeePage extends Component  {
 
         menuRequested();
 
-        CoffeeService.getCoffeeItems()
+        CoffeeService.getMenuItems(`/coffee/`)
             .then(res => menuLoaded(res))
             .catch(() => {
                 menuCatchedError();
             });
     }
+
  
     render() {
-        const {menuItems} = this.props;
-
+        const { menuItems, loading, error } = this.props;
         
-        const MenuItemList = menuItems.map(item => {
-                return <MenuListItem item={item}/>
+        const onUpdateSearch = (e) => {
+            const term = e.target.value.toLowerCase();
+            console.log(term);
+            return menuItems.filter(item => {
+                return item.name.toLowerCase().indexOf(term);
+            })
+        }
+        
+        const View = () => menuItems.map(item => {
+            return (
+                <>
+                    <Link to={`${item.id}/`} className="shop__item">
+                        <MenuListItem 
+                            key={item.id}
+                            item={item}/>
+                    </Link>
+                </>
+            )
         });
+
+
+        const errorMessage = error ? <Error /> : null;
+        const spinner = loading ? <Spinner /> : null;
+        const content = (!loading && !error) ? <View /> : null;        
 
         return(
             <>
@@ -68,7 +90,12 @@ class CoffeePage extends Component  {
                             <div className="col-lg-4 offset-2">
                                 <form action="#" className="shop__search">
                                     <label className="shop__search-label" htmlFor="filter">Looking for</label>
-                                    <input id="filter" type="text" placeholder="start typing here..." className="shop__search-input" />
+                                    <input
+                                        id="filter"
+                                        type="text"
+                                        placeholder="start typing here..."
+                                        className="shop__search-input"
+                                        onChange={e => onUpdateSearch(e)} />
                                 </form>
                             </div>
                             <div className="col-lg-4">
@@ -88,8 +115,9 @@ class CoffeePage extends Component  {
                             <div className="col-lg-10 offset-lg-1">
                                 <div className="shop__wrapper">
 
-                                    {MenuItemList}
-                                
+                                    {errorMessage}
+                                    {spinner}
+                                    {content}
                                     
                                 </div>
                             </div>

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import AppHeader from '../appHeader';
 import AppFooter from '../appFooter';
-import {MainPage, GoodsPage, CoffeePage, ContactPage} from '../pages';
+import {MainPage, GoodsPage, CoffeePage, ContactPage, CoffeeSinglePage} from '../pages';
 
 import './app.sass';
 
@@ -17,7 +16,7 @@ export default class App extends Component {
           <Route path='/coffee/:id' render={
             ({ match }) => {
               const { id } = match.params;
-              // return <MenuListItemPage menuListItemId={id} />
+              return <CoffeeSinglePage menuListItemId={id} />
             }
           } />
           <Route path='/goods/' exact component={GoodsPage} />
