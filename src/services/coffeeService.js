@@ -14,6 +14,10 @@ export default class CoffeeService {
         return await this.getResource(url);
     }
 
+    async getCoffeeItems(url) {
+        return await this.getResource('/coffee/');
+    }
+
     async postContacts() {
         fetch(`${this._apiBase}/contacts/`,{
             method: 'POST',

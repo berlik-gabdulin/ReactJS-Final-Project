@@ -1,8 +1,7 @@
 const initialState = {
     menu: [],
     loading: true,
-    error: false,
-    orderIsSuccess: false
+    error: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,7 +10,8 @@ const reducer = (state = initialState, action) => {
             const mainMenu = action.payload.map(item => {
                 item.id = item.name.toLowerCase().split(' ').join('-');
                 return item;
-            })
+            });
+            
             return {
                 ...state,
                 menu: mainMenu,

@@ -36,13 +36,9 @@ class CoffeePage extends Component  {
         
         const View = () => menuItems.map(item => {
             return (
-                <>
-                    <Link to={`${item.id}/`} className="shop__item">
-                        <MenuListItem 
-                            key={item.id}
-                            item={item}/>
-                    </Link>
-                </>
+                <Link key={item.id} to={`${item.id}/`} className="shop__item" >
+                    <MenuListItem item={item}/>
+                </Link>
             )
         });
 

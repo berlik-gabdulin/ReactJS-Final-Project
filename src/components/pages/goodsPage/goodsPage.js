@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import WithCoffeeService from '../../hoc';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import MenuListItem from '../../menuListItem';
 import Error from '../../error';
 import Spinner from '../../spinner';
@@ -28,13 +28,10 @@ class GoodsPage extends Component  {
         
         const View = () => menuItems.map(item => {
             return (
-                <>
-                    <div className="shop__item">
-                        <MenuListItem 
-                            key={item.id}
-                            item={item}/>
-                    </div>
-                </>
+                <div key={item.id} className="shop__item">
+                    <MenuListItem item={item}/>
+                </div>
+
             )
         });
 

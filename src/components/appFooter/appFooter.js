@@ -8,7 +8,7 @@ export default class AppFooter extends Component {
             <footer>
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-5 offset-lg-4">
+                        <div className="col-lg-6 offset-lg-3">
                             <NavBar navClassName={'footer'} logoUrl={'logo_black.svg'}/>
                         </div>
                     </div>

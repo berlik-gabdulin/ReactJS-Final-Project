@@ -50,14 +50,16 @@ header
 
 footer 
     padding: 20px 0
+    text-align: center
 .footer
     display: flex
+    justify-content: center
     align-items: flex-end
     margin-top: 30px
     list-style-type: none
     &__item
         font-size: 12px
-        margin-right: 40px
+        margin: 0 20px
         font-weight: normal
         a 
             color: #000 
@@ -197,6 +199,7 @@ footer
         &-btn 
             width: 75px 
             height: 30px
+            margin-left: 7px
             background-color: #fff
             border: none
             box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25)
@@ -205,6 +208,7 @@ footer
             cursor: pointer
             &:first-child
                 border-radius: 4px 0px 0px 4px
+                margin-left: 0
             &:last-child
                 border-radius: 0px 4px 4px 0px
             &:focus
