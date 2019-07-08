@@ -3,7 +3,9 @@ const initialState = {
     loading: true,
     error: false,
     countries: [],
+    searchText: '',
     filteredMenu: [],
+    searchedMenu: [],
     filterCountry: '',
     filterStatus: false
 }
@@ -30,6 +32,21 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: false,
                 countries: countryArray,
+                filterCountry: '',
+                filterStatus: false
+            };
+        case 'MENU_SEARCHED':
+            
+            const menuSearch = state.menu.filter(item => {
+                return item.name.toLowerCase().indexOf(action.search) > -1;
+            })
+            const searchResult = (action.search !== '') ? menuSearch : state.menu;
+            console.log(searchResult);
+
+            return {
+                ...state,
+                filteredMenu: searchResult,
+                filterCountry: '',
                 filterStatus: false
             };
         case 'MENU_FILTERED':

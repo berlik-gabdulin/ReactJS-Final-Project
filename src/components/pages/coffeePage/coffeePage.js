@@ -6,7 +6,7 @@ import MenuListItem from '../../menuListItem';
 import Error from '../../error';
 import Spinner from '../../spinner';
 
-import { menuLoaded, menuFiltered, menuRequested, menuCatchedError } from '../../../actions';
+import { menuLoaded, menuFiltered, menuRequested, menuCatchedError, menuSearch } from '../../../actions';
 
 class CoffeePage extends Component  {
 
@@ -24,18 +24,14 @@ class CoffeePage extends Component  {
 
     componentDidUpdate() {
         // console.log(e)
-    }   
+    }
 
  
     render() {
-        const { menuFiltered, filteredMenu, filterCountry, filterStatus, menuItems, countries, loading, error } = this.props;
+        const { menuFiltered, filteredMenu, filterCountry, menuSearch, countries, loading, error } = this.props;
         
         const onUpdateSearch = (e) => {
-            const term = e.target.value.toLowerCase();
-            console.log(term);
-            return menuItems.filter(item => {
-                return item.name.toLowerCase().indexOf(term);
-            })
+            menuSearch(e.target.value.toLowerCase());
         }
 
         const Filters = () => countries.map((country, index) => {
@@ -48,7 +44,10 @@ class CoffeePage extends Component  {
             return <button
                         key={index}
                         className={`shop__filter-btn ${activeClass()}`}
-                        onClick={(e) => menuFiltered(e.target.innerText)}>{country}</button>
+                        onClick={(e) => {
+                            menuFiltered(e.target.innerText);
+                            document.querySelector('.shop__search').reset();
+                        }}>{country}</button>
         })
         
         const View = () => filteredMenu.map(item => {
@@ -140,7 +139,6 @@ const mapStateToProps = (state) => {
         loading: state.loading,
         error: state.error,
         countries: state.countries,
-        filterStatus: state.filterStatus,
         filterCountry: state.filterCountry
     }
 }
@@ -148,6 +146,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     menuLoaded,
     menuFiltered,
+    menuSearch,
     menuRequested,
     menuCatchedError
 };

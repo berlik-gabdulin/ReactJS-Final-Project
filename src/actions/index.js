@@ -5,6 +5,13 @@ const menuLoaded = (newMenu) => {
     }
 };
 
+const menuSearch = (search) => {
+    return {
+        type: 'MENU_SEARCHED',
+        search
+    }
+};
+
 const menuFiltered = (filter) => {
     return {
         type: 'MENU_FILTERED',
@@ -30,5 +37,6 @@ export {
     menuLoaded,
     menuFiltered,
     menuRequested,
-    menuCatchedError
+    menuCatchedError,
+    menuSearch
 };
