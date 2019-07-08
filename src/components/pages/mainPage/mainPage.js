@@ -29,13 +29,9 @@ class MainPage extends Component {
                 
         const View = () => menuItems.map(item => {
             return (
-                <>
-                    <Link to={`/coffee/${item.id}/`} className="best__item">
-                        <MenuListItem 
-                            key={item.id}
-                            item={item}/>
-                    </Link>
-                </>
+                <Link key={item.id} to={`/coffee/${item.id}/`} className="best__item">
+                    <MenuListItem item={item}/>
+                </Link>
             )
         });
 
@@ -54,7 +50,7 @@ class MainPage extends Component {
                                 <img className="beanslogo" src="logo/Beans_logo.svg" alt="Beans logo" />
                                 <div className="preview__subtitle">We makes every day full of energy and taste</div>
                                 <div className="preview__subtitle">Want to try our beans?</div>
-                                <a href="#" className="preview__btn">More</a>
+                                <Link to="/coffee" className="preview__btn">More</Link>
                             </div>
                         </div>
                     </div>

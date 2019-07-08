@@ -6,7 +6,7 @@ import MenuListItem from '../../menuListItem';
 import Error from '../../error';
 import Spinner from '../../spinner';
 
-import { menuLoaded, menuRequested, menuCatchedError } from '../../../actions';
+import { menuLoaded, menuFiltered, menuRequested, menuCatchedError } from '../../../actions';
 
 class CoffeePage extends Component  {
 
@@ -22,9 +22,13 @@ class CoffeePage extends Component  {
             });
     }
 
+    componentDidUpdate() {
+        // console.log(e)
+    }   
+
  
     render() {
-        const { menuItems, loading, error } = this.props;
+        const { menuFiltered, filteredMenu, filterCountry, filterStatus, menuItems, countries, loading, error } = this.props;
         
         const onUpdateSearch = (e) => {
             const term = e.target.value.toLowerCase();
@@ -33,19 +37,32 @@ class CoffeePage extends Component  {
                 return item.name.toLowerCase().indexOf(term);
             })
         }
+
+        const Filters = () => countries.map((country, index) => {
+
+            const activeClass = () => {
+                const activeClass = (country === filterCountry) ? 'active' : '';
+                return activeClass;
+            }
+
+            return <button
+                        key={index}
+                        className={`shop__filter-btn ${activeClass()}`}
+                        onClick={(e) => menuFiltered(e.target.innerText)}>{country}</button>
+        })
         
-        const View = () => menuItems.map(item => {
+        const View = () => filteredMenu.map(item => {
+
             return (
                 <Link key={item.id} to={`${item.id}/`} className="shop__item" >
                     <MenuListItem item={item}/>
                 </Link>
             )
         });
-
-
+        
         const errorMessage = error ? <Error /> : null;
         const spinner = loading ? <Spinner /> : null;
-        const content = (!loading && !error) ? <View /> : null;        
+        const content = (!loading && !error) ? <View /> : null;
 
         return(
             <>
@@ -93,9 +110,7 @@ class CoffeePage extends Component  {
                                         Or filter
                                     </div>
                                     <div className="shop__filter-group">
-                                        <button className="shop__filter-btn">Brazil</button>
-                                        <button className="shop__filter-btn">Kenya</button>
-                                        <button className="shop__filter-btn">Columbia</button>
+                                        <Filters />
                                     </div>
                                 </div>
                             </div>
@@ -121,13 +136,18 @@ class CoffeePage extends Component  {
 const mapStateToProps = (state) => {
     return {
         menuItems: state.menu,
+        filteredMenu: state.filteredMenu,
         loading: state.loading,
-        error: state.error
+        error: state.error,
+        countries: state.countries,
+        filterStatus: state.filterStatus,
+        filterCountry: state.filterCountry
     }
 }
 
 const mapDispatchToProps = {
     menuLoaded,
+    menuFiltered,
     menuRequested,
     menuCatchedError
 };

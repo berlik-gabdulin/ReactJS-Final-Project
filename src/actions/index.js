@@ -5,6 +5,13 @@ const menuLoaded = (newMenu) => {
     }
 };
 
+const menuFiltered = (filter) => {
+    return {
+        type: 'MENU_FILTERED',
+        filter
+    }
+};
+
 const menuRequested = () => {
     return {
         type: 'MENU_REQUESTED'
@@ -21,6 +28,7 @@ const menuCatchedError = () => {
 
 export {
     menuLoaded,
+    menuFiltered,
     menuRequested,
     menuCatchedError
 };
