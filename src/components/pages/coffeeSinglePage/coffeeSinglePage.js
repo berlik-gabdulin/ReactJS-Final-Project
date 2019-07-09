@@ -5,14 +5,12 @@ import { withRouter } from 'react-router-dom';
 import Error from '../../error';
 import Spinner from '../../spinner';
 
-import { menuLoaded, menuRequested, menuCatchedError } from '../../../actions';
+import { menuLoaded, menuRequested, menuCatchedError, showDescription } from '../../../actions';
 
 class CoffeeSinglePage extends Component {
 
     componentDidMount() {
         const { CoffeeService, menuLoaded, menuRequested, menuCatchedError } = this.props;
-
-        console.log()
 
         menuRequested();
 
@@ -29,11 +27,21 @@ class CoffeeSinglePage extends Component {
 
         const View = () => {
 
-            const { menuItems, menuListItemId } = this.props;
+            const { menuItems, menuListItemId, descVisible, showDescription } = this.props;
 
             const menuItem = menuItems.filter(item => item.id === menuListItemId);
 
             const { url, country, price, description } = menuItem[0];
+
+            const sliceDescription = () => {
+                if (description.length > 200) {
+                    const slicedDescription = description.slice(0, 200) + '...';
+                    console.log(slicedDescription);
+                    return slicedDescription;
+                }
+            }
+            
+            const descr = (sliceDescription() && !descVisible) ? sliceDescription() : description;
 
             return (
                 <div className="row">
@@ -47,9 +55,9 @@ class CoffeeSinglePage extends Component {
                             <span>Country:</span>
                             {country}
                         </div>
-                        <div className="shop__point">
+                        <div className="shop__point" onClick={() => showDescription()}>
                             <span>Description:</span>
-                            {description}
+                            {descr}
                         </div>
                         <div className="shop__point">
                             <span>Price:</span>
@@ -87,14 +95,16 @@ const mapStateToProps = (state) => {
     return {
         menuItems: state.menu,
         loading: state.loading,
-        error: state.error
+        error: state.error,
+        descVisible: state.descVisible
     }
 }
 
 const mapDispatchToProps = {
     menuLoaded,
     menuRequested,
-    menuCatchedError
+    menuCatchedError,
+    showDescription
 };
 
 

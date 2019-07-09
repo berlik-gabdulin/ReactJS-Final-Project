@@ -3,11 +3,19 @@ const initialState = {
     loading: true,
     error: false,
     countries: [],
+    descVisible: false,
     searchText: '',
     filteredMenu: [],
     searchedMenu: [],
     filterCountry: '',
-    filterStatus: false
+    filterStatus: false,
+    message: {
+            name: '',
+            email: '',
+            phone: '',
+            textMessage: ''
+        },
+    messageSent: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -41,7 +49,6 @@ const reducer = (state = initialState, action) => {
                 return item.name.toLowerCase().indexOf(action.search) > -1;
             })
             const searchResult = (action.search !== '') ? menuSearch : state.menu;
-            console.log(searchResult);
 
             return {
                 ...state,
@@ -80,6 +87,21 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loading: action.loading,
                 error: action.error
+            };
+        case 'MESSAGE_POSTED':
+            return {
+                ...state,
+                messageSent: true
+            };
+        case 'ANOTHER_MESSAGE':
+            return {
+                ...state,
+                messageSent: false
+            };
+        case 'SHOW_DESCRIPTION':
+            return {
+                ...state,
+                descVisible: !state.descVisible
             };
         
         default:

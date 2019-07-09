@@ -33,10 +33,29 @@ const menuCatchedError = () => {
     }
 };
 
+const messagePosted = () => {
+    return {
+        type: 'MESSAGE_POSTED'
+    }
+}
+const anotherMessage = () => {
+    return {
+        type: 'ANOTHER_MESSAGE'
+    }
+}
+const showDescription = () => {
+    return {
+        type: 'SHOW_DESCRIPTION'
+    }
+}
+
 export {
     menuLoaded,
     menuFiltered,
     menuRequested,
     menuCatchedError,
-    menuSearch
+    menuSearch,
+    messagePosted,
+    anotherMessage,
+    showDescription
 };

@@ -18,14 +18,14 @@ export default class CoffeeService {
         return await this.getResource('/coffee/');
     }
 
-    async postContacts() {
+    async postContacts(post) {
         fetch(`${this._apiBase}/contacts/`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                
+                data: post
             })
         });
     }
