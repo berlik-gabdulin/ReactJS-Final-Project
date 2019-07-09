@@ -53,7 +53,7 @@ class CoffeeSinglePage extends Component {
                         </div>
                         <div className="shop__point">
                             <span>Price:</span>
-                            <span className="shop__point-price">{price}$</span>
+                            <span className="shop__point-price"> {price}</span>
                         </div>
                     </div>
                 </div>
