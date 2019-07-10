@@ -5,16 +5,18 @@ const menuLoaded = (newMenu) => {
     }
 };
 
-const menuSearch = (search) => {
+const menuSearch = (search, filter) => {
     return {
         type: 'MENU_SEARCHED',
-        search
+        search,
+        filter
     }
 };
 
-const menuFiltered = (filter) => {
+const menuFiltered = (filter, search) => {
     return {
         type: 'MENU_FILTERED',
+        search,
         filter
     }
 };

@@ -33,12 +33,9 @@ class CoffeeSinglePage extends Component {
 
             const { url, country, price, description } = menuItem[0];
 
-            console.log(menuItem[0]);
-
             const sliceDescription = () => {
                 if (description && description.length > 200) {
                     const slicedDescription = description.slice(0, 200) + '...';
-                    console.log(slicedDescription);
                     return slicedDescription;
                 }
             }

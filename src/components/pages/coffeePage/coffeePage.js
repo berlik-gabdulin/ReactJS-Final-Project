@@ -31,7 +31,11 @@ class CoffeePage extends Component  {
         const { menuFiltered, filteredMenu, filterCountry, menuSearch, countries, loading, error } = this.props;
         
         const onUpdateSearch = (e) => {
-            menuSearch(e.target.value.toLowerCase());
+            menuSearch(e.target.value.toLowerCase(), filterCountry);
+        }
+
+        const onFilterMenu = (e) => {
+            menuFiltered(e.target.innerText, menuSearch);
         }
 
         const Filters = () => countries.map((country, index) => {
@@ -45,7 +49,7 @@ class CoffeePage extends Component  {
                         key={index}
                         className={`shop__filter-btn ${activeClass()}`}
                         onClick={(e) => {
-                            menuFiltered(e.target.innerText);
+                            onFilterMenu(e);
                             document.querySelector('.shop__search').reset();
                         }}>{country}</button>
         })

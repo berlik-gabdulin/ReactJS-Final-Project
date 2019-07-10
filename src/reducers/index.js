@@ -6,7 +6,6 @@ const initialState = {
     descVisible: false,
     searchText: '',
     filteredMenu: [],
-    searchedMenu: [],
     filterCountry: '',
     filterStatus: false,
     message: {
