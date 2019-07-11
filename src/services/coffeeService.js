@@ -1,6 +1,6 @@
 export default class CoffeeService {
-    _apiBase = 'http://localhost:3001';
-
+    _apiBase = 'http://coffee.drive-life.com/';
+    
     async getResource(url) {
         const res = await fetch(`${this._apiBase}${url}`);
 

@@ -6,6 +6,8 @@ const initialState = {
     descVisible: false,
     searchText: '',
     filteredMenu: [],
+    searchedMenu: [],
+    currentMenu: [],
     filterCountry: '',
     filterStatus: false,
     message: {
@@ -35,7 +37,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 menu: mainMenu,
-                filteredMenu: mainMenu,
+                currentMenu: mainMenu,
                 loading: false,
                 error: false,
                 countries: countryArray,
@@ -44,36 +46,61 @@ const reducer = (state = initialState, action) => {
             };
         case 'MENU_SEARCHED':
             
-            const menuSearch = state.menu.filter(item => {
-                return item.name.toLowerCase().indexOf(action.search) > -1;
-            })
-            const searchResult = (action.search !== '') ? menuSearch : state.menu;
+            const search = () => {
+                if (action.filter === '') {
+                    const menuSearch = state.menu.filter(item => {
+                        return item.name.toLowerCase().indexOf(action.search) > -1;
+                    })
+                    const searchResult = (action.search !== '') ? menuSearch : state.menu;
+                    return searchResult;
+                } else {
+                    const menuSearch = state.filteredMenu.filter(item => {
+                        return item.name.toLowerCase().indexOf(action.search) > -1;
+                    })
+                    const searchResult = (action.search !== '') ? menuSearch : state.filteredMenu;
+                    return searchResult;
+                }
+            }
 
             return {
                 ...state,
-                filteredMenu: searchResult,
-                filterCountry: '',
-                filterStatus: false
+                currentMenu: search(),
+                searchedMenu: search()
             };
         case 'MENU_FILTERED':
             
             const filteredMenu = () => {
-                if (state.filterCountry !== action.filter) {
-                    const filteredMenu = state.menu.filter(item => item.country === action.filter);
-                    const filterCountry = action.filter;
-                    const status = true;
-                    return [filteredMenu, filterCountry, status];
+                if (action.search === '') {
+                    if (state.filterCountry !== action.filter) {
+                        const filteredMenu = state.searchedMenu.filter(item => item.country === action.filter);
+                        const filterCountry = action.filter;
+                        const status = true;
+                        return [filteredMenu, filterCountry, status];
+                    } else {
+                        const filteredMenu = state.searchedMenu;
+                        const filterCountry = '';
+                        const status = !state.filterStatus;
+                        return [filteredMenu, filterCountry, status];
+                    }
                 } else {
-                    const filteredMenu = state.menu;
-                    const filterCountry = '';
-                    const status = !state.filterStatus;
-                    return [filteredMenu, filterCountry, status];
+                    if (state.filterCountry !== action.filter) {
+                        const filteredMenu = state.menu.filter(item => item.country === action.filter);
+                        const filterCountry = action.filter;
+                        const status = true;
+                        return [filteredMenu, filterCountry, status];
+                    } else {
+                        const filteredMenu = state.menu;
+                        const filterCountry = '';
+                        const status = !state.filterStatus;
+                        return [filteredMenu, filterCountry, status];
+                    }
                 }
             }
 
             return {
                 ...state,
                 filteredMenu: filteredMenu()[0],
+                currentMenu: filteredMenu()[0],
                 filterCountry: filteredMenu()[1],
                 filterStatus: filteredMenu()[2]
             }

@@ -28,14 +28,14 @@ class CoffeePage extends Component  {
 
  
     render() {
-        const { menuFiltered, filteredMenu, filterCountry, menuSearch, countries, loading, error } = this.props;
+        const { menuFiltered, searchedMenu, currentMenu, filterCountry, menuSearch, countries, loading, error } = this.props;
         
         const onUpdateSearch = (e) => {
             menuSearch(e.target.value.toLowerCase(), filterCountry);
         }
 
         const onFilterMenu = (e) => {
-            menuFiltered(e.target.innerText, menuSearch);
+            menuFiltered(e.target.innerText, searchedMenu);
         }
 
         const Filters = () => countries.map((country, index) => {
@@ -50,11 +50,11 @@ class CoffeePage extends Component  {
                         className={`shop__filter-btn ${activeClass()}`}
                         onClick={(e) => {
                             onFilterMenu(e);
-                            document.querySelector('.shop__search').reset();
+                            // document.querySelector('.shop__search').reset();
                         }}>{country}</button>
         })
         
-        const View = () => filteredMenu.map(item => {
+        const View = () => currentMenu.map(item => {
 
             return (
                 <Link key={item.id} to={`${item.id}/`} className="shop__item" >
@@ -82,7 +82,7 @@ class CoffeePage extends Component  {
                             </div>
                             <div className="col-lg-4">
                                 <div className="title">About our beans</div>
-                                <img className="beanslogo" src="/logo/Beans_logo_dark.svg" alt="Beans logo" />
+                                <img className="beanslogo" src="/logo/beans_logo_dark.svg" alt="Beans logo" />
                                 <div className="shop__text">
                                     Extremity sweetness difficult behaviour he of. On disposal of as landlord horrible.
                                     <br/><br/>
@@ -139,7 +139,7 @@ class CoffeePage extends Component  {
 const mapStateToProps = (state) => {
     return {
         menuItems: state.menu,
-        filteredMenu: state.filteredMenu,
+        currentMenu: state.currentMenu,
         loading: state.loading,
         error: state.error,
         countries: state.countries,
